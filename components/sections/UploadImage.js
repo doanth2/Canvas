@@ -16,7 +16,6 @@ const UploadImage = ({ listImage, setListImage, setSelectedImage }) => {
       // console.log(e.target.files)
       if (e.target.files) {
          const fileArray = Array.from(e.target.files).map((name) => URL.createObjectURL(name))
-         // console.log(fileArray)
          setAddFileImages((prevImages) => prevImages.concat(fileArray))
          Array.from(e.target.files).map((name) => URL.createObjectURL(name))
       }
