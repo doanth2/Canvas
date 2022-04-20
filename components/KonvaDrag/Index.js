@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Stage, Layer, Image, Rect, Transformer } from 'react-konva';
 import { makeStyles } from "@material-ui/core/styles";
 import useImage from 'use-image';
-// import './Canvas.module.css'
+
 const useStyles = makeStyles((theme) => ({
    img: {
       width: "100px",
