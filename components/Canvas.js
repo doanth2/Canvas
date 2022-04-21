@@ -4,7 +4,7 @@ import ReactCrop from 'react-image-crop'
 import ImageList from '@material-ui/core/ImageList';
 import Button from '@material-ui/core/Button';
 import 'react-image-crop/dist/ReactCrop.css'
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
    root: {
       display: "flex",
       justifyContent: "space-evenly",
@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
       cursor: "pointer",
       fontSize:"0.8rem",
       justifyContent:"center",
+      borderRadius:"5px",
       "& button": {
          minWidth: "10%",
       },
@@ -55,8 +56,9 @@ const useStyles = makeStyles((theme) => ({
       margin: "5px",
       "&:hover": { backgroundColor: "#2275D2", color: "#fff" },
       "@media screen and (max-width: 767px)": {
-         display: "flex",
-
+         width: "90%",
+         width: "90%",
+         padding: "1px",
       },
    },
    label: {
@@ -136,7 +138,7 @@ const Canvas = () => {
    const [rotate, setRotate] = useState(0);
    const [result, setResult] = useState()
    const [scale, setScale] = useState(1)
-   const hiddenFileInput = useRef(null);
+   const upoadFile = useRef(null);
 
    async function getCroppedImg() {
       const image = await createImage(selectedImg);
@@ -160,23 +162,23 @@ const Canvas = () => {
       const cropImage = canvas.toDataURL('image/jpeg/png')
       setResult(cropImage)
    }
-   const onSelectFile = (event) => {
-      const selectedFiles = event.target.files;
+   const onSelectFile = (e) => {
+      const selectedFiles = e.target.files;
       const selectedFilesArray = Array.from(selectedFiles);
       const imagesArray = selectedFilesArray.map((file) => {
          return URL.createObjectURL(file);
       });
       setSelectedImages((prevImages) => prevImages.concat(imagesArray));
    };
-   const handleClick = event => {
-      hiddenFileInput.current.click();
+   const handleClickUpload = (e) => {
+      upoadFile.current.click();
    };
    return (
       <section>
          <div className={classes.root}>
             <div className={classes.column}>
                <label className={classes.label} htmlFor="rotate-input">
-                  <Button onClick={handleClick} variant="contained"
+                  <Button onClick={handleClickUpload} variant="contained"
                      color="primary" className={classes.input}
                   >
                      Upload Images
@@ -185,7 +187,7 @@ const Canvas = () => {
                      type="file"
                      name="images"
                      onChange={onSelectFile}
-                     ref={hiddenFileInput}
+                     ref={upoadFile}
                      style={{ display: 'none' }}
                      multiple
                      accept="image/png , image/jpeg, image/webp"
