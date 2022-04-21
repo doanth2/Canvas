@@ -2,38 +2,50 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import ReactCrop from 'react-image-crop'
 import ImageList from '@material-ui/core/ImageList';
-import Paper from "@material-ui/core/Paper";
 import Button from '@material-ui/core/Button';
 import 'react-image-crop/dist/ReactCrop.css'
-import Grid from '@material-ui/core/Grid';
-import { blue } from "@material-ui/core/colors";
 const useStyles = makeStyles((theme) => ({
    root: {
       display: "flex",
-      justifyContent: "center"
+      justifyContent: "space-around",
+      marginTop:"20px"
    },
-   result: {
-      width: "30px"
+   column: {
+      flexBasis: "30%",
+      padding:"12px 16px"
    },
-   buttonCrop: {
-      display: "flex",
-      justifyContent: "center",
-      margin: "15px 80px"
+   // mainColumn: {
+   //    flexBasis: "40%"
+   // },
+   // endColumn: {
+   //    flexBasis: "20%"
+   // },
+
+      input: {
+      border: "1px solid #ff4081",
+      display: "inline-block",
+      padding: "6px",
+      // marginTop: "10px",
+      // marginLeft: "15px",
+      cursor: "pointer",
+      "& button": {
+         minWidth: "10%",
+      },
    },
    listImg: {
-      margin: "20px",
-      display: "flex",
-      flexDirection: "column",
-      flexWrap: "wrap",
+      // margin: "20px",
+      // display: "flex",
+   // flexDirection: "column",
+   //    flexWrap: "wrap",
       // maxHeight: "150px",
       backgroundColor: "#e8eaf6",
       width: "250px",
       height: "500px",
-      // overflow: "scroll"
+      overflow: "scroll"
    },
    img: {
-      display: "flex",
-      justifyContent: "center",
+      // display: "flex",
+      // justifyContent: "center",
       width: "100px",
       height: "100px",
       padding: "3px",
@@ -49,29 +61,34 @@ const useStyles = makeStyles((theme) => ({
       padding: "0 1px 0 1px",
       backgroundColor: "#FFFFFF"
    },
-   input: {
-      border: "1px solid #ff4081",
-      display: "inline-block",
-      padding: "6px",
-      marginTop: "10px",
-      marginLeft: "15px",
-      cursor: "pointer",
-      "& button": {
-         minWidth: "10%",
-      },
-   },
+
    selected: {
       border: "4px solid #ff4081",
       width: "300px",
       height: "300px",
    },
+      buttonCrop: {
+      // display: "flex",
+      // justifyContent: "center",
+      margin:"10px 150px",
+      borderRadius:"5px"
+      // margin: "15px 100px"
+   },
    dropImg: {
       backgroundColor: "lightgrey",
-      width: "400px",
+      width: "470px",
       border: "0 solid none",
-      padding: "60px",
-      margin: "20px"
-   }
+      padding: "65px",
+      display:"flex",
+      justifyContent:"center"
+      // margin: "20px"
+   },
+      result: {
+         marginLeft:"80px"
+   //    display:"flex",
+   //   justifyContent:"content",
+   //   margin:"20px 20px 0 0"
+   },
 }));
 const createImage = (url) =>
    new Promise((resolve, reject) => {
@@ -122,8 +139,8 @@ const Photo = () => {
    };
    return (
       <section>
-         <Grid container spacing={2}>
-            <Grid item xs={4}>
+         <div className={classes.root}>
+            <div className={classes.column}>
                <label className={classes.label}>
                   <input
                      className={classes.input}
@@ -155,19 +172,17 @@ const Photo = () => {
                            </div>
                         );
                      })}
-
                   </ImageList>
 
                </div>
-            </Grid>
-            <Grid item xs={8}>
+            </div>
+            <div className={classes.column}>
                <Button className={classes.buttonCrop}
                   variant="contained" color="secondary"
                   onClick={getCroppedImg}>
                   Crop Image
                </Button>
                <div className={classes.container}
-
                >
                   {Boolean(selectedImg) && (
                      <ReactCrop
@@ -184,15 +199,16 @@ const Photo = () => {
                      </ReactCrop>
                   )}
                </div>
+            </div>
+            <div className={classes.column}>
                {result && <div className={classes.result}>
                   <img src={result} alt="crop image" />
                </div>}
-            </Grid>
+            </div>
             <div className={classes.root}>
             </div>
-         </Grid>
+         </div>
       </section>
-
    )
 }
 export default Photo
