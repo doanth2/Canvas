@@ -1,0 +1,1 @@
+--First you pull the code from github to the Vscode tool,... and run the npm install command on the Terminal. Then you run the command nmp run dev code will display the interface after being render.
