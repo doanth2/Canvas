@@ -12,15 +12,11 @@ const useStyles = makeStyles((theme) => ({
       "@media screen and (max-width: 767px)": {
          display: "block",
       },
-      "@media screen and (max-width: 320px)": {
-         display: "block",
-      },
    },
    column: {
       flexBasis: "30%",
       padding: "12px 16px",
       "@media screen and (max-width: 767px)": {
-         // display:"flex",
          margin: "0 auto"
       },
    },
@@ -173,7 +169,7 @@ const Canvas = () => {
       <section>
          <div className={classes.root}>
             <div className={classes.column}>
-               <label className={classes.label} htmlFor="rotate-input   ">
+               <label className={classes.label} htmlFor="rotate-input">
                   <input
                      className={classes.input}
                      type="file"
