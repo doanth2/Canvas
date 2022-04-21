@@ -8,11 +8,21 @@ const useStyles = makeStyles((theme) => ({
    root: {
       display: "flex",
       justifyContent: "space-evenly",
-      marginTop: "20px"
+      marginTop: "20px",
+      "@media screen and (max-width: 767px)": {
+         display: "block",
+      },
+      "@media screen and (max-width: 320px)": {
+         display: "block",
+      },
    },
    column: {
       flexBasis: "30%",
-      padding: "12px 16px"
+      padding: "12px 16px",
+      "@media screen and (max-width: 767px)": {
+         // display:"flex",
+         margin: "0 auto"
+      },
    },
    input: {
       border: "1px solid #ff4081",
@@ -22,12 +32,22 @@ const useStyles = makeStyles((theme) => ({
       "& button": {
          minWidth: "10%",
       },
+      "@media screen and (max-width: 767px)": {
+         display: "flex",
+         margin: "0 auto",
+         marginBottom: "15px"
+      },
    },
    listImg: {
       backgroundColor: "#ECEEF1",
       width: "270px",
       height: "500px",
-      overflow: "scroll"
+      overflow: "scroll",
+      "@media screen and (max-width: 767px)": {
+         display: "flex",
+         margin: "0 auto",
+         marginBottom: "15px",
+      },
    },
    img: {
       width: "100px",
@@ -36,14 +56,21 @@ const useStyles = makeStyles((theme) => ({
       cursor: "pointer",
       margin: "5px",
       "&:hover": { backgroundColor: "#2275D2", color: "#fff" },
-   },
+      "@media screen and (max-width: 767px)": {
+         display: "flex",
 
+      },
+   },
    label: {
       maxWidth: "150px"
    },
    form: {
       padding: "8px 0",
-      display: "flex"
+      display: "flex",
+      "@media screen and (max-width: 767px)": {
+         padding: "8px",
+         marginBottom: "10px"
+      },
    },
    formLabel: {
       minWidth: "90px"
@@ -60,10 +87,21 @@ const useStyles = makeStyles((theme) => ({
       border: "4px solid #ff4081",
       width: "300px",
       height: "300px",
+      "@media screen and (max-width: 767px)": {
+         display: "flex",
+         width: "60%",
+         height: "60%",
+         marginRight: "90px"
+      },
    },
    buttonCrop: {
       margin: "10px 170px",
-      borderRadius: "5px"
+      borderRadius: "5px",
+      "@media screen and (max-width: 767px)": {
+         display: "flex",
+         margin: "0 auto",
+         marginTop: "30px"
+      },
    },
    dropImg: {
       backgroundColor: "#ECEEF1",
@@ -71,10 +109,15 @@ const useStyles = makeStyles((theme) => ({
       border: "0 solid none",
       padding: "65px",
       display: "flex",
-      justifyContent: "center"
+      justifyContent: "center",
    },
    result: {
       margin: "75px 80px",
+      "@media screen and (max-width: 767px)": {
+         display: "flex",
+         marginTop: "10px",
+         justifyContent: "center"
+      },
    },
 }));
 const createImage = (url) =>
@@ -191,7 +234,6 @@ const Canvas = () => {
                         setRotate(Math.min(180, Math.max(-180, Number(e.target.value))))
                      }
                   /></div>
-
                <div className={classes.container}
                >
                   {Boolean(selectedImg) && (
