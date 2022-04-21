@@ -109,7 +109,7 @@ const Index = () => {
                         setSelectedImages(selectedImages.filter((e) => e !== image))
                      }
                   >
-                     delete image
+                     delete imagfdweoi
                   </button>
                   <div className={classes.picture}>
                      <Stage
