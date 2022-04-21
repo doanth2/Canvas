@@ -41,6 +41,16 @@ const useStyles = makeStyles((theme) => ({
    label: {
       maxWidth: "150px"
    },
+   form: {
+      padding: "8px 0",
+      display: "flex"
+   },
+   formLabel: {
+      minWidth: "90px"
+   },
+   formInput: {
+      flex: "1"
+   },
    removeButton: {
       padding: "0 1px 0 1px",
       backgroundColor: "#FFFFFF"
@@ -157,29 +167,35 @@ const Canvas = () => {
                </div>
             </div>
             <div className={classes.column}>
-               <Button className={classes.buttonCrop}
-                  variant="contained" color="secondary"
-                  onClick={getCroppedImg}>
-                  Crop Image
-               </Button>
-               <label htmlFor="scale-input">Scale: </label>
-               <input
-                  id="scale-input"
-                  type="number"
-                  step="0.1"
-                  value={scale}
-                  onChange={(e) => setScale(Number(e.target.value))}
-               />
-               <div className={classes.container}
-               >     <label htmlFor="rotate-input">Rotate: </label>
+               <div className={classes.form}>
+                  <label
+                     className={classes.formLabel}
+                     htmlFor="scale-input">Scale: </label>
                   <input
+                     className={classes.formInput}
+                     id="scale-input"
+                     type="number"
+                     step="0.1"
+                     value={scale}
+                     onChange={(e) => setScale(Number(e.target.value))}
+                  />
+               </div>
+               <div className={classes.form}>
+                  <label
+                     className={classes.formLabel}
+                     htmlFor="rotate-input">Rotate: </label>
+                  <input
+                     className={classes.formInput}
                      id="rotate-input"
                      type="number"
                      value={rotate}
                      onChange={(e) =>
                         setRotate(Math.min(180, Math.max(-180, Number(e.target.value))))
                      }
-                  />
+                  /></div>
+
+               <div className={classes.container}
+               >
                   {Boolean(selectedImg) && (
                      <ReactCrop
                         crop={crop}
@@ -196,6 +212,11 @@ const Canvas = () => {
                      </ReactCrop>
                   )}
                </div>
+               <Button className={classes.buttonCrop}
+                  variant="contained" color="secondary"
+                  onClick={getCroppedImg}>
+                  Crop Image
+               </Button>
             </div>
             <div className={classes.column}>
                {result && <div className={classes.result}>
