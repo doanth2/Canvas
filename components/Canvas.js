@@ -115,7 +115,7 @@ const Canvas = () => {
          crop.width * scaleX,
          crop.height * scaleY
       );
-      const cropImage = canvas.toDataURL('image/jpeg', 0.5)
+      const cropImage = canvas.toDataURL('image/jpeg/png')
       setResult(cropImage)
    }
    const onSelectFile = (event) => {
