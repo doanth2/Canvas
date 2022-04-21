@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import ReactCrop from 'react-image-crop'
 import ImageList from '@material-ui/core/ImageList';
@@ -20,18 +20,20 @@ const useStyles = makeStyles((theme) => ({
          margin: "0 auto"
       },
    },
-   input: {
-      border: "1px solid #ff4081",
-      display: "inline-block",
+   input: { 
+      display: "flex",
+      margin: "0 0 35px 50px",
       padding: "7px",
       cursor: "pointer",
+      fontSize:"0.8rem",
+      justifyContent:"center",
       "& button": {
          minWidth: "10%",
       },
       "@media screen and (max-width: 767px)": {
          display: "flex",
          margin: "0 auto",
-         marginBottom: "15px"
+         marginBottom: "15px",
       },
    },
    listImg: {
@@ -134,6 +136,7 @@ const Canvas = () => {
    const [rotate, setRotate] = useState(0);
    const [result, setResult] = useState()
    const [scale, setScale] = useState(1)
+   const hiddenFileInput = useRef(null);
 
    async function getCroppedImg() {
       const image = await createImage(selectedImg);
@@ -165,16 +168,25 @@ const Canvas = () => {
       });
       setSelectedImages((prevImages) => prevImages.concat(imagesArray));
    };
+   const handleClick = event => {
+      hiddenFileInput.current.click();
+   };
    return (
       <section>
          <div className={classes.root}>
             <div className={classes.column}>
                <label className={classes.label} htmlFor="rotate-input">
+                  <Button onClick={handleClick} variant="contained"
+                     color="primary" className={classes.input}
+                  >
+                     Upload Images
+                  </Button>
                   <input
-                     className={classes.input}
                      type="file"
                      name="images"
                      onChange={onSelectFile}
+                     ref={hiddenFileInput}
+                     style={{ display: 'none' }}
                      multiple
                      accept="image/png , image/jpeg, image/webp"
                   />
