@@ -115,7 +115,7 @@ const Canvas = () => {
          crop.width * scaleX,
          crop.height * scaleY
       );
-      const cropImage = canvas.toDataURL('image/png')
+      const cropImage = canvas.toDataURL('image/jpeg', 0.5)
       setResult(cropImage)
    }
    const onSelectFile = (event) => {
@@ -220,8 +220,6 @@ const Canvas = () => {
                {result && <div className={classes.result}>
                   <img src={result} alt="crop image" />
                </div>}
-            </div>
-            <div className={classes.root}>
             </div>
          </div>
       </section>
