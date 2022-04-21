@@ -8,44 +8,28 @@ const useStyles = makeStyles((theme) => ({
    root: {
       display: "flex",
       justifyContent: "space-around",
-      marginTop:"20px"
+      marginTop: "20px"
    },
    column: {
       flexBasis: "30%",
-      padding:"12px 16px"
+      padding: "12px 16px"
    },
-   // mainColumn: {
-   //    flexBasis: "40%"
-   // },
-   // endColumn: {
-   //    flexBasis: "20%"
-   // },
-
-      input: {
+   input: {
       border: "1px solid #ff4081",
       display: "inline-block",
-      padding: "6px",
-      // marginTop: "10px",
-      // marginLeft: "15px",
+      padding: "7px",
       cursor: "pointer",
       "& button": {
          minWidth: "10%",
       },
    },
    listImg: {
-      // margin: "20px",
-      // display: "flex",
-   // flexDirection: "column",
-   //    flexWrap: "wrap",
-      // maxHeight: "150px",
-      backgroundColor: "#e8eaf6",
-      width: "250px",
+      backgroundColor: "#ECEEF1",
+      width: "270px",
       height: "500px",
       overflow: "scroll"
    },
    img: {
-      // display: "flex",
-      // justifyContent: "center",
       width: "100px",
       height: "100px",
       padding: "3px",
@@ -67,27 +51,21 @@ const useStyles = makeStyles((theme) => ({
       width: "300px",
       height: "300px",
    },
-      buttonCrop: {
-      // display: "flex",
-      // justifyContent: "center",
-      margin:"10px 150px",
-      borderRadius:"5px"
-      // margin: "15px 100px"
+   buttonCrop: {
+      margin: "10px 170px",
+      borderRadius: "5px"
    },
    dropImg: {
-      backgroundColor: "lightgrey",
+      backgroundColor: "#ECEEF1",
       width: "470px",
       border: "0 solid none",
       padding: "65px",
-      display:"flex",
-      justifyContent:"center"
-      // margin: "20px"
+      display: "flex",
+      justifyContent: "center"
    },
-      result: {
-         marginLeft:"80px"
-   //    display:"flex",
-   //   justifyContent:"content",
-   //   margin:"20px 20px 0 0"
+   result: {
+      marginLeft: "80px",
+      marginTop: "58px"
    },
 }));
 const createImage = (url) =>
@@ -99,13 +77,15 @@ const createImage = (url) =>
       image.src = url;
    });
 const photo = ["https://image.shutterstock.com/image-photo/picture-beautiful-view-birds-260nw-1836263689.jpg"]
-const Photo = () => {
+const Canvas = () => {
    const classes = useStyles();
 
    const [selectedImg, setSelectedImg] = useState(photo)
    const [selectedImages, setSelectedImages] = useState([]);
    const [crop, setCrop] = useState({ aspect: 16 / 9 });
+   const [rotate, setRotate] = useState(0);
    const [result, setResult] = useState()
+   const [scale, setScale] = useState(1)
 
    async function getCroppedImg() {
       const image = await createImage(selectedImg);
@@ -141,7 +121,7 @@ const Photo = () => {
       <section>
          <div className={classes.root}>
             <div className={classes.column}>
-               <label className={classes.label}>
+               <label className={classes.label} htmlFor="rotate-input   ">
                   <input
                      className={classes.input}
                      type="file"
@@ -153,9 +133,9 @@ const Photo = () => {
                </label>
                <div className={classes.listImg}>
                   <ImageList variant="woven" cols={2} rowHeight={164}>
-                     {selectedImages && selectedImages.map((img) => {
+                     {selectedImages && selectedImages.map((img, index) => {
                         return (
-                           <div>
+                           <div key={index}>
                               <img
                                  src={img} alt="img" className={classes.img}
                                  style={{ border: selectedImg === img ? "4px solid #ff4081" : "" }}
@@ -182,8 +162,24 @@ const Photo = () => {
                   onClick={getCroppedImg}>
                   Crop Image
                </Button>
+               <label htmlFor="scale-input">Scale: </label>
+               <input
+                  id="scale-input"
+                  type="number"
+                  step="0.1"
+                  value={scale}
+                  onChange={(e) => setScale(Number(e.target.value))}
+               />
                <div className={classes.container}
-               >
+               >     <label htmlFor="rotate-input">Rotate: </label>
+                  <input
+                     id="rotate-input"
+                     type="number"
+                     value={rotate}
+                     onChange={(e) =>
+                        setRotate(Math.min(180, Math.max(-180, Number(e.target.value))))
+                     }
+                  />
                   {Boolean(selectedImg) && (
                      <ReactCrop
                         crop={crop}
@@ -192,6 +188,7 @@ const Photo = () => {
                         <div className={classes.dropImg}>
                            <img
                               alt="Crop me"
+                              style={{ transform: `scale(${scale}) rotate(${rotate}deg)` }}
                               src={selectedImg}
                               className={classes.selected}
                            />
@@ -211,4 +208,4 @@ const Photo = () => {
       </section>
    )
 }
-export default Photo
+export default Canvas
