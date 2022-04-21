@@ -7,7 +7,7 @@ import 'react-image-crop/dist/ReactCrop.css'
 const useStyles = makeStyles((theme) => ({
    root: {
       display: "flex",
-      justifyContent: "space-around",
+      justifyContent: "space-evenly",
       marginTop: "20px"
    },
    column: {
@@ -74,8 +74,7 @@ const useStyles = makeStyles((theme) => ({
       justifyContent: "center"
    },
    result: {
-      marginLeft: "80px",
-      marginTop: "58px"
+      margin: "75px 80px",
    },
 }));
 const createImage = (url) =>
@@ -163,7 +162,6 @@ const Canvas = () => {
                         );
                      })}
                   </ImageList>
-
                </div>
             </div>
             <div className={classes.column}>
